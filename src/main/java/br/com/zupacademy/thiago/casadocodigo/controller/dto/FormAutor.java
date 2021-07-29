@@ -1,6 +1,7 @@
 package br.com.zupacademy.thiago.casadocodigo.controller.dto;
 
 import br.com.zupacademy.thiago.casadocodigo.model.Autor;
+import br.com.zupacademy.thiago.casadocodigo.validator.EmailDisponivel;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,29 +15,16 @@ public class FormAutor {
 
     @NotBlank
     @Email
+    @EmailDisponivel
     private String email;
 
     @NotBlank @Size(max = 400)
     private String descricao;
 
-    public FormAutor() {}
-
     public FormAutor(String nome, String email, String descricao) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 
     public Autor toAutor() {

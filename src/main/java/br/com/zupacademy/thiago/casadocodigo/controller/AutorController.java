@@ -23,8 +23,4 @@ public class AutorController {
         autorRepository.save(autor);
     }
 
-    @GetMapping
-    public String check() {
-        return "Hello World!";
-    }
 }
