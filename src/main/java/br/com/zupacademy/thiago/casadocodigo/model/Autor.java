@@ -32,6 +32,10 @@ public class Autor {
         this.instante = instante;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,4 +48,5 @@ public class Autor {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
