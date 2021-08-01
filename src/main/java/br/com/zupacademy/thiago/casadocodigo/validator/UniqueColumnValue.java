@@ -8,11 +8,16 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({FIELD})
+@Target(FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = ValidadorEmailDisponivel.class)
-public @interface EmailDisponivel {
-    String message() default "Email duplicado";
-    Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
+@Constraint(validatedBy = UniqueColumnValueValidator.class)
+public @interface UniqueColumnValue {
+
+    Class<?>[] groups() default { };
+    Class<? extends Payload>[] payload() default { };
+
+    String message() default "Valor repetido";
+    Class<?> modelo();
+    String campo();
+
 }

@@ -1,7 +1,7 @@
 package br.com.zupacademy.thiago.casadocodigo.controller.dto;
 
 import br.com.zupacademy.thiago.casadocodigo.model.Autor;
-import br.com.zupacademy.thiago.casadocodigo.validator.EmailDisponivel;
+import br.com.zupacademy.thiago.casadocodigo.validator.UniqueColumnValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,7 +15,7 @@ public class FormAutor {
 
     @NotBlank
     @Email
-    @EmailDisponivel
+    @UniqueColumnValue(modelo = Autor.class, campo = "email")
     private String email;
 
     @NotBlank @Size(max = 400)
@@ -28,7 +28,6 @@ public class FormAutor {
     }
 
     public Autor toAutor() {
-        Autor autor = new Autor(this.nome, this.email, this.descricao, Instant.now());
-        return autor;
+        return new Autor(this.nome, this.email, this.descricao, Instant.now());
     }
 }

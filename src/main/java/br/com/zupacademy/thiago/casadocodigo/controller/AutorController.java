@@ -5,6 +5,7 @@ import br.com.zupacademy.thiago.casadocodigo.model.Autor;
 import br.com.zupacademy.thiago.casadocodigo.repository.AutorRepository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -18,6 +19,7 @@ public class AutorController {
     }
 
     @PostMapping
+    @Transactional
     public void cadastrarAutor(@RequestBody @Valid FormAutor form) {
         Autor autor = form.toAutor();
         autorRepository.save(autor);
