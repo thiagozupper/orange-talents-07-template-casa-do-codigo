@@ -1,5 +1,6 @@
 package br.com.zupacademy.thiago.casadocodigo.controller;
 
+import br.com.zupacademy.thiago.casadocodigo.controller.dto.DetalhesLivroDTO;
 import br.com.zupacademy.thiago.casadocodigo.controller.dto.FormLivro;
 import br.com.zupacademy.thiago.casadocodigo.controller.dto.LivroDTO;
 import br.com.zupacademy.thiago.casadocodigo.model.Livro;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livros")
@@ -40,6 +41,16 @@ public class LivroController {
         Page<Livro> livros = livroRepository.findAll(pageable);
         Page<LivroDTO> livrosDto = LivroDTO.toPageLivroDTO(livros);
         return ResponseEntity.ok(livrosDto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesLivroDTO> detalhesLivro(@PathVariable Long id) {
+        Optional<Livro> optional = livroRepository.findById(id);
+        if (optional.isPresent()) {
+            Livro livro = optional.get();
+            return ResponseEntity.ok(new DetalhesLivroDTO(livro));
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
