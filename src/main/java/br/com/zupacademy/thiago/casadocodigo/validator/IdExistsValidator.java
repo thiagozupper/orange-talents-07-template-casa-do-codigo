@@ -25,7 +25,11 @@ public class IdExistsValidator implements ConstraintValidator<IdExists, Long> {
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        
+
+        if (value == null) {
+            return true;
+        }
+
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT m FROM ");
         jpql.append(this.modelo.getSimpleName());

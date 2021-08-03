@@ -31,4 +31,8 @@ public class Pais {
     public int hashCode() {
         return Objects.hash(id, nome);
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }
